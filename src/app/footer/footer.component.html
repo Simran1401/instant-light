@@ -1,0 +1,168 @@
+<footer>
+    <div class="container-fluid">
+        <div class="row desktop">
+            <div class="col-lg-3 col-md-3 col-12">
+                <div>
+                    <a class="navbar-brand" routerLink="/">
+                        <img src="../../assets/imgs/logo_png.png" class="logo_img" alt="">
+                    </a>
+                    <p class="p-16">{{contactInfo?.footer_description}} </p>
+                    <p class="p-20">Stay Connected</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box">
+                            <a href="{{contactInfo?.facebook}}">
+                                <i class='fa fa-facebook'></i>
+                            </a>
+                        </div>
+                        <div class="icon-box">
+                            <a href="{{contactInfo?.twitter}}">
+                                <i class='fa fa-twitter'></i>
+                            </a>
+                        </div>
+                        <div class="icon-box">
+                            <a href="{{contactInfo?.instagram}}">
+                                <i class='fa fa-instagram'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-12">
+                <div>
+                    <p class="p-20-5">Contact Us</p>
+                    <a class="p-16" href="tel:{{contactInfo?.mobile}}">{{ contactInfo?.mobile }}</a>
+                    <a class="p-16" href="mailto:{{contactInfo?.email}}" style="word-break: break-all;">{{contactInfo?.email}}</a>
+                    <a class="p-16">{{contactInfo?.address}}</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-12">
+                <div>
+                    <p class="p-20-5">Quick Links</p>
+                    <a routerLink="/blogs" class="p-16">Blogs</a>
+                    <a routerLink="/catalogues" class="p-16">Catalogues</a>
+                    <a routerLink="/about-us" class="p-16">About Us</a>
+                    <a routerLink="/contact-us" class="p-16">Contact</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-12">
+                <div>
+                    <p class="p-20-5">Support & Policy</p>
+                    <a class="p-16" routerLink="/faq">FAQs</a>
+                    <a class="p-16" (click)="redirect('Terms-And-Conditions')" style="cursor: pointer;">Terms &
+                        Conditions</a>
+                    <a class="p-16" (click)="redirect('Privacy-Policy')" style="cursor: pointer;">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+                <div>
+                    <p class="p-20-5">Newsletter</p>
+                    <p class="p-16">Subscribe to get newsletter</p>
+                    <!-- <form>
+                        <div class="d-flex">
+                            <input type="email" placeholder="Enter your email ">
+                            <button type="button">Subscribe</button>
+                        </div>
+                    </form> -->
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubscribe()">
+                        <div class="d-flex">
+                            <input type="email" placeholder="Email Address" class="form-control mb-0" name="email"
+                                formControlName="email">
+                            <button class="common-btn mt-0" type="submit">Submit</button>
+                        </div>
+                        <div class="alert-success alert mt-3" *ngIf="successMessege">
+                            {{successMessege}}
+                        </div>
+                        <div class="alert-danger alert mt-3" *ngIf="errorMessage && !successMessege">
+                            {{errorMessage}}
+                        </div>
+                        <div class="alert-danger alert mt-3" *ngIf="contactForm.get('email')?.invalid && submitted">
+                            Invalid email format
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row ipad">
+            <div class="col-lg-2 col-md-5 col-12">
+                <div>
+                    <p class="p-20-5">Contact Us</p>
+                    <a class="p-16" href="tel:{{contactInfo?.mobile}}">{{ contactInfo?.mobile }}</a>
+                    <a class="p-16" href="mailto:{{contactInfo?.email}}" style="word-break: break-all;">{{contactInfo?.email}}</a>
+                    <a class="p-16">{{contactInfo?.address}}</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-12">
+                <div>
+                    <p class="p-20-5">Quick Links</p>
+                    <a routerLink="/blogs" class="p-16">Blogs</a>
+                    <a routerLink="/catalogues" class="p-16">Catalogues</a>
+                    <a routerLink="/about-us" class="p-16">About Us</a>
+                    <a routerLink="/contact-us" class="p-16">Contact</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-12">
+                <div>
+                    <p class="p-20-5">Support & Policy</p>
+                    <a class="p-16" routerLink="/faq">FAQs</a>
+                    <a class="p-16" (click)="redirect('Terms-And-Conditions')" style="cursor: pointer;">Terms &
+                        Conditions</a>
+                    <a class="p-16" (click)="redirect('Privacy-Policy')" style="cursor: pointer;">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div>
+                    <a class="navbar-brand" routerLink="/">
+                        <img src="../../assets/imgs/logo_png.png" class="logo_img" alt="">
+                    </a>
+                    <p class="p-16">{{contactInfo?.footer_description}} </p>
+                    <p class="p-20">Stay Connected</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box">
+                            <a href="{{contactInfo?.facebook}}">
+                                <i class='fa fa-facebook'></i>
+                            </a>
+                        </div>
+                        <div class="icon-box">
+                            <a href="{{contactInfo?.twitter}}">
+                                <i class='fa fa-twitter'></i>
+                            </a>
+                        </div>
+                        <div class="icon-box">
+                            <a href="{{contactInfo?.instagram}}">
+                                <i class='fa fa-instagram'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div>
+                    <p class="p-20-5">Newsletter</p>
+                    <p class="p-16">Subscribe to get newsletter</p>
+                    <!-- <form>
+                        <div class="d-flex">
+                            <input type="email" placeholder="Enter your email ">
+                            <button type="button">Subscribe</button>
+                        </div>
+                    </form> -->
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubscribe()">
+                        <div class="d-flex">
+                            <input type="email" placeholder="Email Address" class="form-control mb-0" name="email"
+                                formControlName="email">
+                            <button class="common-btn mt-0" type="submit">Submit</button>
+                        </div>
+                        <div class="alert-success alert mt-3" *ngIf="successMessege">
+                            {{successMessege}}
+                        </div>
+                        <div class="alert-danger alert mt-3" *ngIf="errorMessage && !successMessege">
+                            {{errorMessage}}
+                        </div>
+                        <div class="alert-danger alert mt-3" *ngIf="contactForm.get('email')?.invalid && submitted">
+                            Invalid email format
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

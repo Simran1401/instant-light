@@ -1,0 +1,32 @@
+<div class="tc-sections">
+    <div class="container-fluid main-pad">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-part">
+                    <ol style="list-style: none; padding-left: 0;">
+                        <li *ngFor="let section of sections">
+                            <div *ngIf="type==section.type">
+                                <button class="scroll-down" (click)="scrollToSection(section.slug)">
+                                    {{ section.title }}
+                                </button>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="section-part">
+                    <p class="p-36-6 mb-sm-3 mb-3">{{type}}</p>
+                    <div class="right-part">
+                        <div *ngFor="let section of sections" [id]="generateValidId(section.slug)">
+                            <div *ngIf="type==section.type">
+                                <p class="b-18-5">{{ section.title }}</p>
+                                <div [innerHtml]="section.description" class="p-16"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

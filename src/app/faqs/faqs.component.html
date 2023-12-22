@@ -1,0 +1,274 @@
+<div class="about-section-1"
+    [style.background]="'linear-gradient(#1881b091, #1881b0c4), url(' + (apiUrl + bannerData.image) + ')'"
+    *ngIf="bannerData && !loading">
+    <div class="main-pad">
+        <p class="p-56">{{bannerData.title}}</p>
+        <p class="p-24">{{bannerData.description}}</p>
+        <p class="p-18-6">Scroll Down</p>
+        <button class="scroll-down" (click)="triggerScrollTo()">
+            <img src="../../assets/imgs/Group 8.svg" alt="">
+        </button>
+    </div>
+</div>
+
+<div class="faqs-section" id="destination" *ngIf="!loading">
+    <div class="main-pad container-fluid">
+        <p class="b-20-5 mb-0">FAQs</p>
+        <p class="p-36-6">{{selectedCategoryFaqs["FAQ Detail"].title}}</p>
+        <p class="p-16">{{selectedCategoryFaqs["FAQ Detail"].description}}</p>
+        <div class="row w-95 mt-5">
+            <div class="col-sm-3">
+                <ol ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs d-block">
+                    <li [ngbNavItem]="index + 1" *ngFor="let category of faqCategories; let index = index">
+                        <button ngbNavLink (click)="loadFaqs(category.slug)">{{ category.title }}</button>
+                        <ng-template ngbNavContent>
+                            <div ngbAccordion [closeOthers]="true">
+                                <div ngbAccordionItem *ngFor="let faq of selectedCategoryFaqs?.FAQ; let i = index">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton class="p-16-5">{{ faq.question }}</button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <p class="p-14 mb-0">{{ faq.answer }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div ngbAccordion [closeOthers]="true">
+                                <div ngbAccordionItem *ngFor="let panel of panels; let i = index" [collapsed]="i !== 0">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton class="p-16-5">{{ panel }}</button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <ng-template>
+                                                <p class="p-14 mb-0">
+                                                    We offer a variety of lighting products, including ceiling lights,
+                                                    wall
+                                                    sconces, table lamps, floor lamps,
+                                                    LED bulbs, outdoor lighting, smart lighting, and specialty lighting.
+                                                </p>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </ng-template>
+                    </li>
+                    <!-- <li [ngbNavItem]="2">
+                        <button ngbNavLink>HVAC Product</button>
+                        <ng-template ngbNavContent>
+                            <p>
+                                Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four
+                                loko
+                                farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk
+                                aliquip jean shorts
+                                ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
+                                mollit. Keytar
+                                helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio
+                                cillum wes anderson
+                                8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
+                                scenester
+                                stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+                            </p>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <button ngbNavLink>LED Product</button>
+                        <ng-template ngbNavContent>
+                            <p>
+                                Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam.
+                                Nulla facilisi.
+                                Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+                                congue et odio.
+                                Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et.
+                                Sed diam urna,
+                                egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus
+                                nisl enim, nec
+                                tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque
+                                penatibus et
+                                magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet
+                                ultricies in eget
+                                neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+                            </p>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="4">
+                        <button ngbNavLink>Electrical Product</button>
+                        <ng-template ngbNavContent>
+                            <p>
+                                Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam.
+                                Nulla facilisi.
+                                Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+                                congue et odio.
+                                Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et.
+                                Sed diam urna,
+                                egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus
+                                nisl enim, nec
+                                tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque
+                                penatibus et
+                                magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet
+                                ultricies in eget
+                                neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+                            </p>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="5">
+                        <button ngbNavLink>Policies for Products</button>
+                        <ng-template ngbNavContent>
+                            <p>
+                                Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam.
+                                Nulla facilisi.
+                                Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+                                congue et odio.
+                                Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et.
+                                Sed diam urna,
+                                egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus
+                                nisl enim, nec
+                                tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque
+                                penatibus et
+                                magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet
+                                ultricies in eget
+                                neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+                            </p>
+                        </ng-template>
+                    </li> -->
+                </ol>
+            </div>
+            <div class="col-sm-9 pl-100">
+                <div class="left-part-8">
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skeleton" *ngIf="loading">
+    <!-- <ngx-skeleton-loader count="5" appearance="circle"></ngx-skeleton-loader> -->
+    <ngx-skeleton-loader count="1" [theme]="{
+        'height.px': 550,
+        'width.%':100,
+        'background-color': '#F9F7F6' ,
+        'display':'block',
+        'margin-bottom':'5rem'}">
+    </ngx-skeleton-loader>
+    <div class="main-pad container-fluid">
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 40,
+            'width.%':7,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'1rem',
+            'margin-top':'2rem'}">
+        </ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 50,
+            'width.%':40,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'35px',}">
+        </ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 15,
+            'width.%':100,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'15px',}">
+        </ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 15,
+            'width.%':50,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'15px',}">
+        </ngx-skeleton-loader>
+        <div class="row w-100 m-0 mt-5 mb-5">
+            <div class="col-sm-3">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 50,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 50,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 50,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 50,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 50,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-9 ps-0 ps-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 15,
+                    'width.%':70,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 15,
+                    'width.%':50,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 15,
+                    'width.%':70,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 15,
+                    'width.%':50,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,1035 @@
+<div *ngIf="!loading" class="animate__animated animate__fadeInUp">
+    <div class="home-section-1" #section1 *ngIf="bannerData?.title || bannerData?.description || bannerData?.image">
+        <div class="left-part-1">
+            <p class="p-56">{{ bannerData.title }}</p>
+            <p class="p-16-5">
+                {{ bannerData.description }}
+            </p>
+            <!-- <button class="shop-btn">SHOP NOW <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </button> -->
+        </div>
+        <div class="right-part-1">
+            <img [src]="apiUrl + bannerData.image" alt="">
+            <img src="../../assets/imgs/Group 1000005977.png" alt="">
+        </div>
+    </div>
+
+    <app-home-section-two #section2></app-home-section-two>
+
+    <div class="home-section-3">
+        <div class="container-fluid">
+            <div class="row w-100 m-0">
+                <div class="col-sm-5" *ngIf="qualityMattersData?.title||qualityMattersData?.description">
+                    <p class="b-20-5 mb-0">Quality Matters</p>
+                    <p class="p-36-6">{{qualityMattersData.title}}</p>
+                    <p class="p-16">{{qualityMattersData.description}}</p>
+                </div>
+                <div class="col-sm-7">
+                    <div class="row m-0 w-100">
+                        <!-- <div class="col-sm-6">
+                        <div class="gradient-box">
+                            <div class="svg-box">
+                                <img src="../../assets/imgs/Frame.svg" alt="">
+                            </div>
+                            <div class="w-80">
+                                <p class="p-18-5 mb-0">LED LIGHTING</p>
+                                <p class="p-16 mb-0">Not just light, but it's the attitude towards life.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="gradient-box">
+                            <div class="svg-box">
+                                <img src="../../assets/imgs/Vector.svg" alt="">
+                            </div>
+                            <div class="w-80">
+                                <p class="p-18-5 mb-0">ELECTRIC FIREPLACES</p>
+                                <p class="p-16 mb-0">Not just light, but it's the attitude towards life.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="gradient-box">
+                            <div class="svg-box">
+                                <img src="../../assets/imgs/Group.svg" alt="">
+                            </div>
+                            <div class="w-80">
+                                <p class="p-18-5 mb-0">LED LIGHTING</p>
+                                <p class="p-16 mb-0">Not just light, but it's the attitude towards life.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="gradient-box">
+                            <div class="svg-box">
+                                <img src="../../assets/imgs/Vector (1).svg" alt="">
+                            </div>
+                            <div class="w-80">
+                                <p class="p-18-5 mb-0">LED LIGHTING</p>
+                                <p class="p-16 mb-0">Not just light, but it's the attitude towards life.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                        <div *ngFor="let card of qualityMattersCardsData" class="col-sm-6">
+                            <div class="gradient-box">
+                                <div class="svg-box">
+                                    <img [src]="apiUrl + card.image" alt="">
+                                </div>
+                                <div class="w-80">
+                                    <p class="p-18-5 mb-0">{{ card.title }}</p>
+                                    <p class="p-16 mb-0">{{ card.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-section-4" *ngIf="oneStopShopData?.image||oneStopShopData?.title||oneStopShopData?.description">
+        <div class="container-fluid">
+            <div class="row m-0 w-100">
+                <div class="col-sm-5 left-part-4 text-center">
+                    <img [src]="apiUrl + oneStopShopData.image" alt="">
+                </div>
+                <div class="col-sm-7 right-part-4">
+                    <p class="p-36-6">{{ oneStopShopData.title }}</p>
+                    <p class="p-16 ">{{ oneStopShopData.description }}</p>
+                    <button class="shop-btn" routerLink="/contact-us">Contact Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-home-section-five></app-home-section-five>
+
+    <!-- <div class="home-section-5">
+        <div class="container-fluid">
+            <p class="b-20-5 mb-0">Latest</p>
+            <div class="d-flex justify-content-between align-items-center mb-5 align_end">
+                <p class="p-36-6 mb-0">Best Selling Products</p>
+                <button class="common-btn">View All</button>
+            </div>
+            <div class="products-div-5 row m-0 w-100">
+                <div *ngFor="let product of bestSellingProducts" class="single-prod-div-5 p-0">
+                    <div class="img-div-5">
+                        <img [src]="apiUrl + product.product.image" alt="">
+                        <a href="/product-details-page/{{ product.id }}">
+                            <div class="eye-btn">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <a href="/product-details-page/{{ product?.product?.id }}" class="hover-5">
+                        <p class="b-16-5 mb-1" style="text-transform: capitalize;">{{ product.product.name }}</p>
+                        <p class="p-16 mb-0 hover-blue" [innerHTML]="product.product.description"></p>
+                        <div class="d-flex align-items-center">
+                            <div class="stars-div-5">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <span class="grey-p">(65)</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+       </div>
+    </div> -->
+
+    <div class="home-section-6">
+        <div class="container-fluid">
+            <p class="p-36-6 text-center mb-4">Proud Partners</p>
+            <div class="faded-border">
+                <div class="row m-0 w-100 " [ngClass]="{'jcc': ProudPartnersdata?.length < 7}">
+                    <img src="{{apiUrl + images.image}}" alt="" *ngFor="let images of ProudPartnersdata">
+                    <!-- <img src="../../assets/imgs/image 74.svg" alt="">
+                    <img src="../../assets/imgs/image 75.svg" alt="">
+                    <img src="../../assets/imgs/image 76.svg" alt="">
+                    <img src="../../assets/imgs/image 77.svg" alt=""> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-home-section-seven></app-home-section-seven>
+
+    <div class="home-section-8">
+        <div class="container-fluid">
+            <div class="row w-100 m-0">
+                <div class="col-sm-7">
+                    <!-- <div class="left-part-8">
+                    <p class="b-20-5 mb-0">FAQ</p>
+                    <p class="p-36-6 mb-4">Frequently Asked Questions</p>
+                    <div ngbAccordion [closeOthers]="true">
+                        <div ngbAccordionItem *ngFor="let panel of panels; let i = index" [collapsed]="i !== 0">
+                            <h2 ngbAccordionHeader>
+                                <button ngbAccordionButton class="p-16-5">{{ panel }}</button>
+                            </h2>
+                            <div ngbAccordionCollapse>
+                                <div ngbAccordionBody>
+                                    <ng-template>
+                                        <p class="p-14 mb-0">
+                                            We offer a variety of lighting products, including ceiling lights, wall
+                                            sconces, table lamps, floor lamps,
+                                            LED bulbs, outdoor lighting, smart lighting, and specialty lighting.
+                                        </p>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                    <div class="left-part-8">
+                        <p class="b-20-5 mb-0">FAQ</p>
+                        <p class="p-36-6 mb-4">Frequently Asked Questions</p>
+                        <div ngbAccordion [closeOthers]="true">
+                            <div ngbAccordionItem *ngFor="let faq of faqData; let i = index" [collapsed]="i !== 0">
+                                <h2 ngbAccordionHeader>
+                                    <button ngbAccordionButton class="p-16-5">{{ faq.question }}</button>
+                                </h2>
+                                <div ngbAccordionCollapse>
+                                    <div ngbAccordionBody>
+                                        <p class="p-14 mb-0">{{ faq.answer }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="right-part-8">
+                        <img src="../../assets/imgs/FAQs-amico 1.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-section-9">
+        <div class="container-fluid">
+            <div class="row w-100 m-0">
+                <div class="col-sm-7">
+                    <div class="left-part-9" *ngIf="contactInfo">
+                        <!-- <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d1809410.4161939034!2d75.4571747947857!3d27.655325702527104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m3!3m2!1d26.888906!2d75.8417746!4m5!1s0x390ce7fc67c8d75f%3A0xe8ff11033535f1dc!2sgftpl!3m2!1d28.464737099999997!2d77.29320299999999!5e0!3m2!1sen!2sin!4v1689839076164!5m2!1sen!2sin"
+                        width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+
+                        <iframe [src]="contactInfo?.google_map | safeUrl" width="95%" height="450" style="border:0;"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-5 mb-sm-0 mb-5">
+                    <div class="right-part-9 ">
+                        <p class="b-20-5 mb-0">Contact</p>
+                        <!-- <p class="p-36-6 mb-2">Get InTouch</p>
+                    <p class="p-16">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                    </p> -->
+                        <p class="p-36-6 mb-2">{{ contactInfo?.title }}</p>
+                        <p class="p-16">
+                            {{ contactInfo?.description }}
+                        </p>
+                        <form [formGroup]="contactForm" (ngSubmit)="addContactUs()">
+                            <div class="mb-4">
+                                <input type="text" placeholder="Name" class="form-control mb-3" name="name"
+                                formControlName="name">
+                                    <span class="text-danger"
+                                    *ngIf="name && name.invalid && name.touched && submitted">Enter your name</span>
+                            </div>
+                            <div class="mb-4">
+                                <input type="email" class="form-control mb-3" id="formGroupExampleInput2" placeholder="Email" formControlName="email">
+                                <span class="text-danger" *ngIf="email && email.invalid && email.touched && submitted">Enter your email
+                                </span>
+                            </div>
+                            <div class="mb-4">
+                                <!-- <input type="text" class="form-control" id="formGroupExampleInput2"
+                                    placeholder="Write your message!!" formControlName="message"> -->
+                                    <textarea style="height: 115px;" placeholder="Message" class="form-control" name="message"
+                                    formControlName="message"></textarea>
+                                    <span class="text-danger" *ngIf="message && message.invalid && message.touched && submitted">Enter your message
+                                    </span>
+                            </div>
+                            <button class="common-btn mt-3" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-section"></div>
+
+    <div class="home-section-10">
+        <div class="container-fluid">
+            <div class="row m-0 w-100">
+                <div class="col-sm-4 mb-sm-0 mb-4">
+                    <div class="contact-info-box">
+                        <img src="../../assets/imgs/supermarket 1.svg" alt="">
+                        <div>
+                            <p class="b-16-5 mb-0">ADDRESS</p>
+                            <!-- <p class="p-14 mb-0">13376 Comber Way, Surrey BC
+                            205 Summerlea Rd, Brampton</p> -->
+                            <p class="p-14 mb-0">{{ contactInfo?.address }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-sm-0 mb-4">
+                    <div class="contact-info-box">
+                        <img src="../../assets/imgs/email 1.svg" alt="">
+                        <div>
+                            <p class="b-16-5 mb-0">EMAIL US</p>
+                            <!-- <p class="p-14 mb-0">addemail@gmail.com <br>
+                            addemail@gmail.com</p> -->
+                            <p class="p-14 mb-0" style="word-break: break-all;">{{ contactInfo?.email }} <br>
+                                {{ contactInfo?.email1 }}</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="contact-info-box">
+                        <img src="../../assets/imgs/telephone 1.svg" alt="">
+                        <div>
+                            <p class="b-16-5 mb-0">CALL US</p>
+                            <!-- <p class="p-14 mb-0">123456789 <br>
+                            123456789
+                        </p> -->
+                            <p class="p-14 mb-0">{{ contactInfo?.mobile }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="skeleton" *ngIf="loading">
+    <div class="main-pad container-fluid">
+        <div class="row w-100 m-0 pt-5">
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 40,
+                'width.%':70,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'1rem',
+                'margin-top':'2rem'}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 40,
+                'width.%':50,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 40,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'25px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 48,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 420,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="row w-100 m-0 mt-5 mb-5">
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 30,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'1rem',
+                'margin-top':'2rem'}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 55,
+                'width.%':80,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 55,
+                'width.%':60,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'25px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':50,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-6">
+                <div class="d-flex" style="flex-wrap: nowrap; overflow: auto;">
+                    <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 350,
+                        'width.px':288,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-right':'15px',}">
+                    </ngx-skeleton-loader>
+                    <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 350,
+                        'width.px':288,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-right':'15px',}">
+                    </ngx-skeleton-loader>
+                    <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 350,
+                        'width.px':50,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-right':'15px',}">
+                    </ngx-skeleton-loader>
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 m-0 mt-5 mb-5">
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 30,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'1rem',
+                'margin-top':'2rem'}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 55,
+                'width.%':80,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 55,
+                'width.%':60,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'25px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':50,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-6">
+                <div class="row w-100 m-0">
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                            'height.px': 135,
+                            'width.%':100,
+                            'background-color': '#F9F7F6' ,
+                            'display':'block',
+                            'margin-right':'15px',
+                            'margin-bottom':'25px',}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                            'height.px': 135,
+                            'width.%':100,
+                            'background-color': '#F9F7F6' ,
+                            'display':'block',
+                            'margin-right':'15px',
+                            'margin-bottom':'25px',}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                            'height.px': 135,
+                            'width.%':100,
+                            'background-color': '#F9F7F6' ,
+                            'display':'block',
+                            'margin-right':'15px',
+                            'margin-bottom':'25px',}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                            'height.px': 135,
+                            'width.%':100,
+                            'background-color': '#F9F7F6' ,
+                            'display':'block',
+                            'margin-right':'15px',
+                            'margin-bottom':'25px',}">
+                        </ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 m-0 mt-5 mb-5">
+            <div class="col-sm-5">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 370,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-7">
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 55,
+                'width.%':80,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 55,
+                'width.%':60,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':90,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'25px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':50,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 20,
+                'width.%':30,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-5">
+            <div style="width: 50%;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 30,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 55,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div style="width: 50%;text-align: right;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',
+                    'margin-left':'auto'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="d-flex mt-3 mb-5" style="flex-wrap: nowrap; overflow: auto;">
+            <div style="margin-right: 15px;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 250,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.px':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 24,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div style="margin-right: 15px;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 250,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.px':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 24,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div style="margin-right: 15px;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 250,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.px':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 24,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div style="margin-right: 15px;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 250,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.px':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 24,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div style="margin-right: 15px;">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 250,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 25,
+                    'width.px':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 24,
+                    'width.px':270,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'10px',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 40,
+            'width.%':20,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-left':'auto',
+            'margin-right':'auto',
+            'margin-top':'2rem'}">
+        </ngx-skeleton-loader>
+        <div class="d-flex mt-5 mb-5 justify-content-center" style="flex-wrap: nowrap; overflow: auto;">
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 32,
+                'width.px':120,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-left':'auto',
+                'margin-right':'30px',}">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 32,
+                'width.px':120,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-left':'auto',
+                'margin-right':'30px',}">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 32,
+                'width.px':120,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-left':'auto',
+                'margin-right':'30px',}">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 32,
+                'width.px':120,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-left':'auto',
+                'margin-right':'30px',}">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 32,
+                'width.px':120,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-left':'auto',
+                'margin-right':'30px',}">
+            </ngx-skeleton-loader>
+        </div>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 30,
+            'width.%':10,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'1rem',
+            'margin-left':'auto',
+            'margin-right':'auto',}">
+        </ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 55,
+            'width.%':30,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-left':'auto',
+            'margin-right':'auto',}">
+        </ngx-skeleton-loader>
+        <div class="row w-100 m-0 mt-5 mb-5">
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 390,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',
+                    'border-radius':'30px'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 430,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',
+                    'border-radius':'30px'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 390,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',
+                    'border-radius':'30px'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="row w-100 m-0 mt-3 mb-5">
+            <div class="col-sm-7">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 30,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem',
+                    'margin-top':'2rem'}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 55,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':60,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':70,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':50,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':76,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':60,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-5 d-sm-block d-none">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 500,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="row w-100 m-0 mt-3 mb-5">
+            <div class="col-sm-7">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 500,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-5 d-sm-block d-none">              
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 30,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 55,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':60,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 115,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':25,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="row m-0 w-100 mt-3 mb-5">
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 120,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 120,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 120,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+
+</div>

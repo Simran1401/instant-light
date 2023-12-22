@@ -1,0 +1,78 @@
+<!-- <form class="search-form desktop-search">
+    <div class="d-flex">
+        <input type="text" placeholder="Search.." name="search" class="form-control">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form> -->
+
+<form class="search-form mob-search">
+    <div class="d-flex" routerLink="/search">
+        <input type="text" placeholder="Search.." name="search" class="form-control">
+        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+    </div>
+</form>
+
+<div class="position-relative">
+    <form class="search-form desktop-search">
+        <div class="d-flex">
+            <input type="text" placeholder="search" [(ngModel)]="searchQuery" name="search" (input)="onSearchInputChange()">
+            <button type="submit" class="fa fa-search search-btn" aria-hidden="true"></button>
+        </div>
+    </form>
+
+    <div class="search_results" *ngIf="searchResultsVisible && searchResults.length > 0 && searchQuery.length >= 3">
+        <p class="p-16-5">Search Results</p>
+        <a href="/product-details-page/{{ product.id }}" class="posts-div mb-3" *ngFor="let product of searchResults" style="color: #000;text-decoration: none;">
+            <img [src]="apiUrl + product.image" alt="">
+    
+            <div>
+                <p class="p-16-5 mb-0" style="text-transform: capitalize;">{{ product.name }}</p>
+                <p class="p-14 mb-0" [innerHTML]="product.description" *ngIf="product.description"></p>
+                <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </button>
+            </div>
+        </a>
+    </div>
+    <div class="search_results h-auto" *ngIf="searchResultsVisible && searchResults.length === 0">
+        <p class="p-16-5">Search Results</p>
+        <div class="lottie-svg">
+            <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+        </div>
+        <p class="p-14 text-center">No results found</p>
+    </div>
+</div>
+
+<!-- <div class="position-relative mob-search">
+    <form class="search-form mob-search">
+        <div class="d-flex">
+            <input type="text" placeholder="search" [(ngModel)]="searchQuery" name="search" (input)="onSearchInputChange()">
+            <button type="submit" class="fa fa-search search-btn" aria-hidden="true"></button>
+        </div>
+    </form>
+
+    <div class="search_results" *ngIf="searchResultsVisible && searchResults.length > 0 && searchQuery.length >= 3">
+        <p class="p-16-5">Search Results</p>
+        <a href="/product-details-page/{{ product.id }}" class="posts-div mb-3" *ngFor="let product of searchResults" style="color: #000;text-decoration: none;">
+            <img [src]="apiUrl + product.image" alt="">
+    
+            <div>
+                <p class="p-16-5 mb-0" style="text-transform: capitalize;">{{ product.name }}</p>
+                <p class="p-14 mb-0" [innerHTML]="product.description"></p>
+                <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </button>
+            </div>
+        </a>
+    </div>
+    <div class="search_results h-auto" *ngIf="searchResultsVisible && searchResults.length === 0">
+        <p class="p-16-5">Search Results</p>
+        <p class="p-14">No results found</p>
+    </div>
+</div> -->

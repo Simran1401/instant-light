@@ -1,0 +1,306 @@
+<div *ngIf="!loading">
+    <div class="breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 align-items-center" *ngIf="isProductsVisible">
+                <li class="breadcrumb-item me-sm-2 me-1"><a routerLink="/" class="p-16"
+                        style="color: #2b2b2b; text-decoration: none;">Home</a></li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+                <li class="breadcrumb-item me-sm-2 me-1"><a href="/category/{{ selectedCategory?.category?.id}}"
+                        class="p-16"
+                        style="color: #2b2b2b; text-decoration: none;text-transform: capitalize;">{{selectedCategory?.category?.title}}</a>
+                </li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+                <li class="breadcrumb-item active p-16" aria-current="page"  style="text-transform: capitalize;">{{selectedCategory?.title}}</li>
+            </ol>
+            <ol class="breadcrumb mb-0 align-items-center" *ngIf="!isProductsVisible">
+                <li class="breadcrumb-item me-sm-2 me-1"><a routerLink="/" class="p-16"
+                        style="color: #2b2b2b; text-decoration: none;">Home</a></li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+                <li class="breadcrumb-item me-sm-2 me-1"><a href="/category/{{ selectedCategory?.category?.id}}"
+                        class="p-16"
+                        style="color: #2b2b2b; text-decoration: none;text-transform: capitalize;">{{selectedCategory?.category?.title}}</a>
+                </li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+                <li class="breadcrumb-item me-sm-2 me-1"><a href="products-page/{{selectedCategory?.id}}"
+                        class="p-16"
+                        style="color: #2b2b2b; text-decoration: none;text-transform: capitalize;">{{selectedCategory?.title}}</a>
+                </li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+                <li class="breadcrumb-item active p-16" aria-current="page" style="text-transform: capitalize;">{{productSubcategory[0]?.subcategory?.title}}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="products-page">
+        <div class="container-fluid main-pad">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-part">
+                        <div class="pc">Product Categories</div>
+                        <div ngbAccordion [closeOthers]="true">
+                            <div ngbAccordionItem *ngFor="let category of productCategory; let i = index"
+                                [collapsed]="!(selectedCategory?.category?.title == category.title)">
+                                <h2 ngbAccordionHeader>
+                                    <button ngbAccordionButton
+                                        [ngClass]="{'active-btn': selectedCategory?.category?.title == category.title}"
+                                        style="text-transform: capitalize;"
+                                        (click)="fetchSubcategoryGroups(category.id)">{{category.title}}</button>
+                                </h2>
+                                <div ngbAccordionCollapse>
+                                    <div ngbAccordionBody>
+                                        <ng-template>
+                                            <a class="b-20-5 subcat-btn"
+                                                href="/products-page/{{ subcat.id }}"
+                                                *ngFor=" let subcat of subcategoryGroups" style="text-decoration: none; text-transform: capitalize;"
+                                                [ngClass]="{'active':selectedSubcategoryGroup?.title==subcat.title}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                {{subcat.title}}
+                                            </a>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div ngbAccordionItem>
+                                <h2 ngbAccordionHeader>
+                                    <button ngbAccordionButton>
+                                        <span>HVAC</span>
+                                    </button>
+                                </h2>
+                                <div ngbAccordionCollapse>
+                                    <div ngbAccordionBody>
+                                        <ng-template>
+                                            <button class="b-20-5 subcat-btn active">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                Boxes
+                                            </button>
+                                            <button class="b-20-5 subcat-btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                Drivers
+                                            </button>
+                                            <button class="b-20-5 subcat-btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                Plate
+                                            </button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ngbAccordionItem>
+                                <h2 ngbAccordionHeader>
+                                    <button ngbAccordionButton>
+                                        <span>LED</span>
+                                    </button>
+                                </h2>
+                                <div ngbAccordionCollapse>
+                                    <div ngbAccordionBody>
+                                        <ng-template>
+                                            <button class="b-20-5 subcat-btn active">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                Boxes
+                                            </button>
+                                            <button class="b-20-5 subcat-btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                Drivers
+                                            </button>
+                                            <button class="b-20-5 subcat-btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                Plate
+                                            </button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="right-part">
+                        <div class="row w-100 m-0" *ngIf="isProductsVisible">
+                            <div class="col-sm-4" *ngFor="let subcat of subcategories">
+                                <div class="prod-card">
+                                    <img src="{{apiUrl + subcat.image}}" alt="">
+                                    <button class="view-coll-btn" style="text-transform: capitalize;"
+                                        (click)="fetchSubcategoryWiseProd(subcat.id)">{{subcat.title}} ({{subcat.product_count}})</button>
+                                        <!-- <a class="view-coll-btn" style="text-transform: capitalize;"
+                                            href="products-page/{{subcat?.subcategory_group_subcategory[0]?.id}}/{{subcat?.id}}">{{subcat.title}} ({{subcat.product_count}})</a> -->
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-4">
+                            <div class="prod-card">
+                                <img src="../../assets/imgs/image 83.svg" alt="">
+                                <button class="view-coll-btn" (click)="toggleProductsVisibility()">Metal Boxes(36)</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="prod-card">
+                                <img src="../../assets/imgs/image 84.svg" alt="">
+                                <button class="view-coll-btn" (click)="toggleProductsVisibility()">Non Metalic Boxes(6)</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="prod-card">
+                                <img src="../../assets/imgs/image 80.svg" alt="">
+                                <button class="view-coll-btn" (click)="toggleProductsVisibility()">Floor Metal Boxes(3)</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="prod-card">
+                                <img src="../../assets/imgs/image 83.svg" alt="">
+                                <button class="view-coll-btn" (click)="toggleProductsVisibility()">Metal Boxes(36)</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="prod-card">
+                                <img src="../../assets/imgs/image 84.svg" alt="">
+                                <button class="view-coll-btn" (click)="toggleProductsVisibility()">Non Metalic Boxes(6)</button>
+                            </div>
+                        </div> -->
+                        </div>
+                        <div class="row w-100 m-0" *ngIf="!isProductsVisible">
+                            <div class="col-sm-4" *ngFor="let product of productSubcategory">
+                                <div class="sub-prod-card">
+                                    <a href="/product-details-page/{{ product.id }}"
+                                        style="text-decoration: none;color: #000;">
+                                        <img src="{{ apiUrl + product.image }}" alt="">
+                                        <p class="p-20-5" style="text-transform: capitalize;">{{ product.name }}</p>
+                                        <p class="p-16" [innerHTML]="product.description"></p>
+                                        <!-- <button class="readMore-btn">Read More</button> -->
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-12" *ngIf="productSubcategory.length === 0">
+                                <div class="lottie-svg">
+                                    <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+                                </div>
+                                <h4 class="mb-5 text-center">Can't find any product!</h4>
+                            </div>
+                        </div>
+                        <!-- <div class="row w-100 m-0" *ngIf="!isProductsVisible">
+                        <div class="col-sm-4">
+                            <div class="sub-prod-card" routerLink="/product-details-page">
+                                <img src="../../assets/imgs/image 81.svg" alt="">
+                                <p class="p-20-5">FB-R240SN</p>
+                                <p class="p-16">
+                                    Nickel plated brass flush round dual Floor Box assembly with flip lid cover
+                                </p>
+                                <button class="readMore-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="sub-prod-card" routerLink="/product-details-page">
+                                <img src="../../assets/imgs/image 82.svg" alt="">
+                                <p class="p-20-5">FB-R240SN</p>
+                                <p class="p-16">
+                                    Nickel plated brass flush round dual Floor Box assembly with flip lid cover
+                                </p>
+                                <button class="readMore-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="sub-prod-card" routerLink="/product-details-page">
+                                <img src="../../assets/imgs/image 81.svg" alt="">
+                                <p class="p-20-5">FB-R240SN</p>
+                                <p class="p-16">
+                                    Nickel plated brass flush round dual Floor Box assembly with flip lid cover
+                                </p>
+                                <button class="readMore-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="sub-prod-card" routerLink="/product-details-page">
+                                <img src="../../assets/imgs/image 82.svg" alt="">
+                                <p class="p-20-5">FB-R240SN</p>
+                                <p class="p-16">
+                                    Nickel plated brass flush round dual Floor Box assembly with flip lid cover
+                                </p>
+                                <button class="readMore-btn">Read More</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skeleton" *ngIf="loading">
+    <ngx-skeleton-loader count="1" [theme]="{
+        'height.px': 72,
+        'width.%':100,
+        'background-color': '#F9F7F6' ,
+        'display':'block',
+        'margin-bottom':'1rem',}">
+    </ngx-skeleton-loader>
+    <div class="main-pad container-fluid mt-5">
+        <div class="row w-100 m-0">
+            <div class="col-sm-3">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 350,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-9">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 350,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

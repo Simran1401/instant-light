@@ -1,0 +1,202 @@
+<div *ngIf="!loading">
+    <div class="about-section-1"
+        [style.background]="'linear-gradient(#1881b091, #1881b0c4), url(' + (apiUrl + bannerData.image) + ')'"
+        *ngIf="bannerData">
+        <div class="main-pad">
+            <p class="p-56">{{bannerData.title}}</p>
+            <p class="p-24">{{bannerData.description}}</p>
+            <p class="p-18-6">Scroll Down</p>
+            <button class="scroll-down" (click)="triggerScrollTo()">
+                <img src="../../assets/imgs/Group 8.svg" alt="">
+            </button>
+        </div>
+    </div>
+
+    <div class="contact-section" id="destination">
+        <div class="home-section-9">
+            <div class="container-fluid main-pad">
+                <div class="row w-100 m-0">
+                    <div class="col-sm-7">
+                        <div class="left-part-9">
+                            <iframe [src]="contactInfo?.google_map | safeUrl" width="95%" height="450" style="border:0;"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 mb-sm-0 mb-5">
+                        <div class="right-part-9 ">
+                            <p class="b-20-5 mb-0">Contact</p>
+                            <p class="p-36-6 mb-2">{{contactInfo?.title}}</p>
+                            <p class="p-16">{{contactInfo?.description}}
+                            </p>
+                            <!-- <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                            <input type="text" placeholder="Name" class="form-control mb-3" name="name"
+                                formControlName="name">
+                            <div class="alert"
+                                *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.touched || submitted)">
+                                Username is required</div>
+                            <input type="email" placeholder="Email Address" class="form-control mb-3" name="email"
+                                formControlName="email">
+                            <div class="alert"
+                                *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.touched || submitted)">
+                                Invalid email</div>
+                            <textarea style="height: 115px;" placeholder="Message" class="form-control" name="msg"
+                                formControlName="msg"></textarea>
+                            <div class="alert mt-3"
+                                *ngIf="contactForm.get('msg')?.invalid && (contactForm.get('msg')?.touched || submitted)">
+                                Message is required</div>
+                            <button class="common-btn mt-3" type="submit">Submit</button>
+                        </form> -->
+                            <form [formGroup]="contactForm" (ngSubmit)="addContactUs()">
+                                <div class="mb-4">
+                                    <input type="text" placeholder="Name" class="form-control mb-3" name="name"
+                                        formControlName="name">
+                                    <span class="text-danger"
+                                        *ngIf="name && name.invalid && name.touched && submitted">Enter your name</span>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="email" class="form-control mb-3" id="formGroupExampleInput2"
+                                        placeholder="Email" formControlName="email">
+                                    <span class="text-danger"
+                                        *ngIf="email && email.invalid && email.touched && submitted">Enter your email
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    <!-- <input type="text" class="form-control" id="formGroupExampleInput2"
+                                    placeholder="Write your message!!" formControlName="message"> -->
+                                    <textarea style="height: 115px;" placeholder="Message" class="form-control"
+                                        name="message" formControlName="message"></textarea>
+                                    <span class="text-danger"
+                                        *ngIf="message && message.invalid && message.touched && submitted">Enter your
+                                        message
+                                    </span>
+                                </div>
+                                <button class="common-btn mt-3" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="empty-section">
+
+            <div class="home-section-10">
+                <div class="container-fluid main-pad">
+                    <div class="row m-0 w-100">
+                        <div class="col-sm-4 mb-sm-0 mb-4">
+                            <div class="contact-info-box">
+                                <img src="../../assets/imgs/supermarket 1.svg" alt="">
+                                <div>
+                                    <p class="b-16-5 mb-0">ADDRESS</p>
+                                    <p class="p-14 mb-0">{{ contactInfo?.address }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-sm-0 mb-4">
+                            <div class="contact-info-box">
+                                <img src="../../assets/imgs/email 1.svg" alt="">
+                                <div>
+                                    <p class="b-16-5 mb-0">EMAIL US</p>
+                                    <p class="p-14 mb-0">{{ contactInfo?.email }} <br>
+                                        {{ contactInfo?.email1 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="contact-info-box">
+                                <img src="../../assets/imgs/telephone 1.svg" alt="">
+                                <div>
+                                    <p class="b-16-5 mb-0">CALL US</p>
+                                    <p class="p-14 mb-0">{{ contactInfo?.mobile }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="skeleton" *ngIf="loading">
+    <ngx-skeleton-loader count="1" [theme]="{
+        'height.px': 550,
+        'width.%':100,
+        'background-color': '#F9F7F6' ,
+        'display':'block',
+        'margin-bottom':'5rem'}">
+    </ngx-skeleton-loader>
+    <div class="main-pad container-fluid">
+        <div class="row w-100 m-0 mt-3 mb-5">
+            <div class="col-sm-7">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 500,
+                    'width.%':90,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-left':'auto',
+                    'margin-right':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-5 d-sm-block d-none">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 30,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 55,
+                    'width.%':80,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'35px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':60,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 20,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 115,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 48,
+                    'width.%':25,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'15px',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

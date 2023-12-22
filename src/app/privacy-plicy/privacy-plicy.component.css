@@ -1,0 +1,66 @@
+.tc-sections{
+    padding: 85px 0 50px 0;
+    background-color: #F9F9F9;
+}
+
+.left-part{
+    height: 500px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.scroll-down{
+    background-color: transparent;
+    border: none;
+    padding: 20px;
+}
+
+ol li{    
+    border-bottom: 1px solid #eee;
+}
+
+ol li button{
+    width: 100%;
+    text-align: start;
+    text-transform: capitalize;
+}
+
+ol li:hover{
+    font-weight: 500;
+    transition: .3s;
+}
+
+ol li button:hover{
+    font-weight: 500;
+    transition: .3s;
+}
+
+.right-part{
+    height: 500px;
+    overflow: auto;
+}
+
+.section-part{
+    background-color: #fff;
+    padding: 20px;
+}
+
+@media (max-width:765px) {
+    .left-part{
+        display: none;
+    }
+
+    .right-part{
+        height: auto;
+        padding: 0;
+    }
+
+    .tc-sections{
+        padding: 30px 0 50px 0;
+        background-color: #fff;
+    }
+
+    .section-part{
+        padding: 0;
+    }
+}

@@ -1,0 +1,142 @@
+<div *ngIf="!loading">
+    <div class="about-section-1" *ngIf="catBanner.title || catBanner.description || catBanner.image"  [style.background]="'linear-gradient(#1881b091, #1881b0c4), url(' + (apiUrl + catBanner.image) + ')'">
+        <div class="main-pad">
+            <p class="p-56" style="text-transform: uppercase;">{{catBanner.title}}</p>
+            <p class="p-24">{{catBanner.description}}</p>
+            <p class="p-18-6">Scroll Down</p>
+            <button class="scroll-down" (click)="triggerScrollTo()">
+                <img src="../../assets/imgs/Group 8.svg" alt="">
+            </button>
+        </div>
+    </div>
+
+    <div class="es-section-2" id="destination">
+        <div class="main-pad container-fluid">
+            <p class="b-20-5 mb-0">Category</p>
+            <p class="p-36-6 mb-4 mb-sm-5">{{catBanner.subtitle}}</p>
+            <div class="row">
+                <div class="col-sm-4" *ngFor="let subcatg of subcategoryGroups">
+                    <a href="/products-page/{{ subcatg.id }}" style="text-decoration: none; color: #000;">
+                        <div class="cat-cards">
+                            <div class="cat-img-box">
+                                <img src="{{apiUrl + subcatg.image}}" alt="">
+                            </div>
+                            <p class="p-24-5" style="text-transform: capitalize;">{{subcatg.title}}</p>
+                            <p class="p-16" *ngIf="subcatg?.description">{{subcatg.description}}</p>
+                            <button class="view-coll-btn" >View Collection</button>
+                        </div>
+                    </a>
+                </div>
+                <!-- <div class="col-sm-4">
+                <div class="cat-cards">
+                    <div class="cat-img-box">
+                        <img src="../../assets/imgs/1680872533drivers.jpg" alt="">
+                    </div>
+                    <p class="p-24-5">DRIVERS</p>
+                    <p class="p-16">Lorem ipsum dolor sit amet, or incididunt ut labore et dolore magna aliqua. </p>
+                    <button class="view-coll-btn">View Collection</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="cat-cards">
+                    <div class="cat-img-box">
+                        <img src="../../assets/imgs/1680872578plate.jpg" alt="">
+                    </div>
+                    <p class="p-24-5">PLATE</p>
+                    <p class="p-16">Lorem ipsum dolor sit amet, or incididunt ut labore et dolore magna aliqua. </p>
+                    <button class="view-coll-btn">View Collection</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="cat-cards">
+                    <div class="cat-img-box">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                    </div>
+                    <p class="p-24-5">RECESSED LIGHTING</p>
+                    <p class="p-16">Lorem ipsum dolor sit amet, or incididunt ut labore et dolore magna aliqua. </p>
+                    <button class="view-coll-btn">View Collection</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="cat-cards">
+                    <div class="cat-img-box">
+                        <img src="../../assets/imgs/1680872558miscellaneous-.jpg" alt="">
+                    </div>
+                    <p class="p-24-5">MISCELLANEOUS</p>
+                    <p class="p-16">Lorem ipsum dolor sit amet, or incididunt ut labore et dolore magna aliqua. </p>
+                    <button class="view-coll-btn">View Collection</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="cat-cards">
+                    <div class="cat-img-box">
+                        <img src="../../assets/imgs/1680872708wiringdevices.jpg" alt="">
+                    </div>
+                    <p class="p-24-5">WIRING DEVICES</p>
+                    <p class="p-16">Lorem ipsum dolor sit amet, or incididunt ut labore et dolore magna aliqua. </p>
+                    <button class="view-coll-btn">View Collection</button>
+                </div>
+            </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skeleton" *ngIf="loading">
+    <ngx-skeleton-loader count="1" [theme]="{
+        'height.px': 550,
+        'width.%':100,
+        'background-color': '#F9F7F6' ,
+        'display':'block',
+        'margin-bottom':'5rem'}">
+    </ngx-skeleton-loader>
+    <div class="main-pad container-fluid">
+        <div class="row">
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 40,
+                'width.%':7,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'1rem',
+                'margin-top':'2rem'}">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 50,
+                'width.%':40,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+            </ngx-skeleton-loader>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 570,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'border-radius':'38px',
+                    'margin-bottom':'5rem'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 570,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'border-radius':'38px',
+                    'margin-bottom':'5rem'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 570,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'border-radius':'38px',
+                    'margin-bottom':'5rem'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

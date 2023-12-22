@@ -1,0 +1,33 @@
+<div class="home-section-5">
+    <div class="container-fluid main-pad">
+        <p class="b-20-5 mb-0">Latest</p>
+        <div class="d-flex justify-content-between align-items-center mb-5 align_end">
+            <p class="p-36-6 mb-0">Best Selling Products</p>
+            <!-- <button class="common-btn">View All</button> -->
+        </div>
+        <div class="products-div-5 row m-0 w-100">
+            <owl-carousel-o [options]="customOptions">
+                <ng-container>
+                    <ng-template carouselSlide *ngFor="let product of bestSellingProducts">
+                        <div class="prod-slides">
+                            <div class="img-div-5">
+                                <img [src]="apiUrl + product.product.image" alt="">
+                                <a href="/product-details-page/{{ product.id }}">
+                                    <div class="eye-btn">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <a href="/product-details-page/{{ product?.product?.id }}" class="hover-5">
+                                <p class="b-16-5 mb-1" style="text-transform: capitalize;">{{ product.product.name }}
+                                </p>
+                                <p class="p-16 mb-0 hover-blue" [innerHTML]="product.product.description"></p>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+
+    </div>
+</div>

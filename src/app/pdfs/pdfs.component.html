@@ -1,0 +1,232 @@
+<div class="container-fluid main-pad py-5" *ngIf="!loading">
+    <div class="row">
+        <div class="col-sm-6 col-lg-5 col-12 col-md-3 d_flex">
+            <p class="b-20-5 mb-0">Catalogue</p>
+            <p class="p-30-6">{{ pdfProducts && pdfProducts.length > 0 ?
+                pdfProducts[0]?.category?.title + " PRODUCTS" : '' }}</p>
+            <p class="p-16 mb-4">
+                Click the button below to download a printable PDF
+            </p>
+            <button class="common-btn" (click)="printInvoice()">Download PDF</button>
+        </div>
+        <div class="col-sm-6 col-lg-7 col-12 col-md-9">
+            <div class="pd-section">
+                <div class="products-section" #invoice>
+                    <div class="cover-section">
+                        <img src="../../assets/imgs/image 65.png" alt="" class="logo-img">
+                        <div class="cover_section">
+                            <img src="{{'.' + pdfProducts[0]?.category?.full_path_image}}" alt="">
+                            <!-- <img src="../../assets/imgs/image 99.png" alt=""> -->
+                            <div class="cover_heading">
+                                <p class="p-48-7">{{ pdfProducts && pdfProducts.length > 0 ?
+                                    pdfProducts[0]?.category?.title : '' }}</p>
+                                <p class="p-26-5">CATALOUGE</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-4 mb-3">
+                            <p class="p-18-7">YEAR <br> 2022-2023</p>
+                            <p class="p-18">Lorem ipsum dolor sit amet, consectetur adipi
+                                scing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+                                ipsum dt.adipiscing elit, incididunt ut dipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="about-sections">
+                            <div class="about-section-2">
+                                <div class="row w-100 m-0">
+                                    <div class="col-sm-5 pe-0 p_s">
+                                        <div class="img-ab-div">
+                                            <img src="../../assets/imgs/image90.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <p class="p-36-6 mb-0">About Us</p>
+                                        <p class="p-24-5 mb-1">Heading</p>
+                                        <p class="p-16">asellus vestibulum lorem sed risus ultricies tristique. Lacus
+                                            vel facilisis
+                                            volutpat </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="about-section-3">
+                                <div class="row w-100 m-0">
+                                    <div class="col-sm-3 p-0">
+                                        <div class="img-q">
+
+                                            <!-- <img src="../../assets/imgs/image90.png" alt=""> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9 p-4">
+                                        <p class="p-36-6 mb-1">Quality Matters</p>
+                                        <p class="p-16">Ortech Industries Inc. is proud to provide you the highest
+                                            quality construction materials. We pride ourselves on delivering the highest
+                                            quality, so you can focus on what matters most to you. Since our inception
+                                            in 2004, we have stood by our products, providing customers with the most
+                                            reliable construction materials ranging from lighting, electrical and
+                                            ventilation products. Now a national supplier, ORTECH products can be found
+                                            in more than 2 million homes across Canada and the USA.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contents">
+                            <div class="heading mb-3">
+                                <span>CONTENTS</span>
+                                <p class="b-28-5 mb-0">TABLE OF CONTENTS</p>
+                            </div>
+                            <div class="contentsPart mb-5">
+                                <p class="p-24 mb-3">LED BULBS</p>
+                                <table class="table">
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="contentsPart ">
+                                <p class="p-24 mb-3">LED BULBS</p>
+                                <table class="table">
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bulbs</td>
+                                        <td>04</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="section-1 mb-3 mt-5" *ngFor="let products of pdfProducts ; let i=index">
+                            <p class="p-24 mb-5" style="text-transform: capitalize;">{{products.subcategory.title}}</p>
+                            <div class="row w-100 m-0">
+                                <div class="col-sm-3">
+                                    <img src="{{'.' + products.image}}" alt="" class="prod-img">
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="p-20-b" style="text-transform: capitalize;">{{products.name}}</p>
+                                    <!-- <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p> -->
+                                    <p class="p-16-b mb-1">Description:</p>
+                                    <p class="p-16" [innerHTML]="products.description"></p>
+                                </div>
+                                <div class="col-sm-4"
+                                    *ngIf="pdfProducts[i]?.product_feature_product && pdfProducts[i]?.product_feature_product.length > 0">
+                                    <p class="p-16-b mb-1">Specification:</p>
+                                    <p class="p-16 mb-1"
+                                        *ngFor="let features of pdfProducts[i]?.product_feature_product">
+                                        {{features.feature_group}}: <span
+                                            style="color: #1881B0;">{{features.feature}}</span> </p>
+                                    <!-- <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p> -->
+                                </div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="section-3 mb-3">
+                            <p class="p-24 mb-5">NOTES</p>
+                            <div class="notes"></div>
+                            <div class="notes"></div>
+                            <div class="notes"></div>
+                            <div class="notes"></div>
+                            <div class="notes"></div>
+                            <div class="notes"></div>
+                            <div class="notes"></div>
+                        </div>
+                        <div class="section-4 text-center">
+                            <p class="p-36-7">INSTANT LIGHT</p>
+                            <img src="../../assets/imgs/Group 1000006029.png" alt="" class="footer-img mb-3">
+                            <p class="p-18-b">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore
+                                et dolore magna aliqua. Commodo sed egestas egestas fringilla. Et egestas quis ipsum
+                                suspendisse
+                                ultrices gravida dictum fusce. Habitant morbi tristique senectus et netus et malesuada
+                                fames. Diam
+                                phasellus vestibulum lorem sed risus ultricies tristique. Lacus vel facilisis volutpat
+                                est velit
+                                egestas dui id ornare. Nec feugiat in fermentum posuere urna nec. Massa tincidunt nunc
+                                pulvinar
+                                sapien. Ultricies lacus sed turpis tincidunt id aliquet risus. Elit at imperdiet dui
+                                accumsan. Amet
+                                consectetur adipiscing elit duis tristique sollicitudin nibh sit. Id volutpat lacus
+                                laoreet non
+                                curabitur gravida arcu ac. Euismod quis viverra nibh cras pulvina
+                            </p>
+                            <pre class="b-24-6">www.instantlight.com   |   81901-3718191</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skeleton" *ngIf="loading">
+    <div class="container-fluid main-pad py-5">
+        <div class="row w-100 m-0">
+            <div class="col-sm-6 col-lg-5 col-12 col-md-3">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px':30,
+                    'width.%':30,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'.7rem',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px':45,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'2.2rem',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px':15,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'2.3rem',}">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px':48,
+                    'width.%':35,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem',}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-6 col-lg-7 col-12 col-md-9">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px':530,
+                    'width.%':85,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem',
+                    'margin-LEFT':'auto',}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

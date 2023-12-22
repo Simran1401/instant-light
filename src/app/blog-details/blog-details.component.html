@@ -1,0 +1,196 @@
+<div class="breadcrumbs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 align-items-center">
+            <li class="breadcrumb-item me-sm-2 me-1"><a routerLink="/" class="p-16"
+                    style="color: #2b2b2b; text-decoration: none;">Home</a></li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+            <li class="breadcrumb-item me-sm-2 me-1"><a routerLink="/blogs" class="p-16"
+                    style="color: #2b2b2b; text-decoration: none;">Blogs</a></li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-chevron-right me-sm-2 me-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+            <li class="breadcrumb-item active p-16" aria-current="page">{{selectedBlog.title}}</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="blogs" *ngIf="!loading">
+    <div class="main-pad container-fluid">
+        <p class="b-20-5 mb-0">Blogs</p>
+        <p class="p-36-6 mb-4 mb-sm-5">Watch Our Latest Updates</p>
+        <div class="row mb-3">
+            <div class="col-sm-8">
+                <!-- <ngb-carousel #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+                    (slide)="onSlide($event)">
+                    <ng-template ngbSlide *ngFor="let img of images; index as i">
+                        <div class="picsum-img-wrapper">
+                            <img [src]="img" alt="My image {{i + 1}} description" class="slider-img" />
+                        </div>
+                    </ng-template>
+                </ngb-carousel> -->
+                <ngb-carousel #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+                    (slide)="onSlide($event)">
+                    <ng-template ngbSlide *ngFor="let img of selectedBlog.blog_image">
+                        <div class="picsum-img-wrapper">
+                            <img [src]="apiUrl + img.image" alt="Blog image" class="slider-img" />
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+                <div class="blogd-content mt-4">
+                    <p class="b-18-5 mb-0">{{selectedBlog.sub_title}}</p>
+                    <p class="p-26-7">{{ selectedBlog.title }}</p>
+                    <p class="p-16" [innerHTML]="selectedBlog.description"> </p>
+                    <!-- <div class="blockquote">
+                        <p class="p-16-5">
+                            Dignissim suspendisse in est ante in. Dui sapien eget mi proin sed libero enim. Bibendum ut
+                            tristique et egestas. Mauris nunc congue nisi vitae suscipit tellus mauris a diam. Nibh
+                            mauris
+                            cursus mattis molestie a iaculis at. Nullam vehicula ipsum a arcu cursus vitae congue
+                        </p>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="blog-right-part">
+                    <form (ngSubmit)="searchBlogs()">
+                        <div class="d-flex">
+                            <input type="text" placeholder="search" [(ngModel)]="searchQuery" name="search"
+                                (input)="onSearchInputChange()">
+                            <button type="submit" class="fa fa-search" aria-hidden="true"></button>
+                        </div>
+                    </form>
+
+                    <div class="search_results"
+                        *ngIf="searchResultsVisible && searchResults.length > 0&& searchQuery.length >= 1">
+                        <div class="posts-div mb-3" *ngFor="let post of searchResults"
+                            [routerLink]="['/blog-details', post.slug]">
+                            <img [src]="apiUrl + post.blog_image[0].image" alt="">
+                            <div>
+                                <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg"
+                                        width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+                                        viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search_results h-auto"
+                        *ngIf="searchResultsVisible && searchResults.length === 0 && searchQuery.length >= 1">
+                        <p class="p-16-5 mb-0">Search Results</p>
+                        <div class="lottie-svg">
+                            <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+                        </div>
+                        <p class="p-14 text-center">No results found</p>
+                    </div>
+                    <div class="tags-posts">
+                        <p class="p-20-5">Tags</p>
+                        <div class="tags-div">
+                            <p class="b-18-5" *ngFor="let tags of selectedBlog.tags">{{tags.title}}</p>
+                        </div>
+                        <div class="hidden-div">
+                            <p class="p-20-5">Popular Posts</p>
+                            <div class="mb-5">
+                                <a class="posts-div mb-3" *ngFor="let post of popularPosts"
+                                    [href]="'/blog-details/' + post.slug" style="text-decoration: none;color:#000;">
+                                    <img src="{{apiUrl + post.blog_image[0].image}}" alt="">
+                                    <div>
+                                        <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                        <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                        <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                            <p class="p-20-5">Trending Posts</p>
+                            <div class="mb-0">
+                                <a class="posts-div mb-3" *ngFor="let post of trendingPosts"
+                                    [href]="'/blog-details/' + post.slug" style="text-decoration: none;color:#000;">
+                                    <img src="{{apiUrl + post.blog_image[0].image}}" alt="">
+                                    <div>
+                                        <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                        <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                        <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skeleton mb-5" *ngIf="loading">
+    <div class="main-pad container-fluid">
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 30,
+            'width.%':30,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'1rem',
+            'margin-top':'2rem'}">
+        </ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 55,
+            'width.%':80,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'15px',}">
+        </ngx-skeleton-loader>
+        <div class="row m-0 w-100">
+            <div class="col-sm-8">
+                <div class="row w-100 m-0">
+                    <div class="col-sm-12 mb-4">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 550,
+                        'width.%':100,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-bottom':'1rem'}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-12">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 250,
+                        'width.%':100,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-bottom':'1rem'}">
+                        </ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 600,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,376 @@
+<div class="about-section-1"
+    [style.background]="'linear-gradient(#1881b091, #1881b0c4), url(' + (apiUrl + bannerData.image) + ')'"
+    *ngIf="bannerData && !loading">
+    <div class="main-pad">
+        <p class="p-56">{{bannerData.title}}</p>
+        <p class="p-24">{{bannerData.description}}</p>
+        <p class="p-18-6">Scroll Down</p>
+        <button class="scroll-down" (click)="triggerScrollTo()">
+            <img src="../../assets/imgs/Group 8.svg" alt="">
+        </button>
+    </div>
+</div>
+
+<div class="catalogues" id="destination" *ngIf="!loading">
+    <div class="main-pad container-fluid">
+        <p class="b-20-5 mb-0">Catalogues</p>
+        <p class="p-36-6 mb-4 mb-sm-5">2023 Edition</p>
+        <div class="cata-bg">
+            <div class="cata-btns-div">
+                <a (click)="filterCatalog('all')" class="cata-btns" [class.active]="activeCategory === 'all'">All</a>
+                <a *ngFor="let catalog of catalogs" (click)="filterCatalog(catalog.category)" class="cata-btns"
+                    [class.active]="activeCategory === catalog.category">
+                    {{ catalog.category }}
+                </a>
+            </div>
+        </div>
+        <div class="row cat-sec-2">
+            <!-- <button class="common-btn" (click)="generatePDF()">Click</button> -->
+            <div *ngFor="let catalog of catalogs" class="col-sm-6 animated"
+                [ngClass]="{'hidden': !catalog.show, 'animate__zoomIn': catalog.show}"
+                [class.animate__zoomIn]="catalog.show" [class.animate__zoomOut]="!catalog.show">
+                <div class="cat-item">
+                    <div class="cat-img-box">
+                        <img src="{{ catalog.image }}" alt="">
+                        <button class="light_bg" (click)="openPdf(catalog.id, catalog)"
+                            style="text-decoration: none;color: #fff; border: none;">
+                            <p class="p-20-7 mb-0">{{ catalog.category | uppercase }}</p>
+                            <div class="spinner-border ms-2" role="status" *ngIf="catalog.loadingPdf">
+                                <span class="sr-only"></span>
+                            </div>
+                            <div class="arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- <div class="pd-section" #pdfContent *ngIf="pdfContentVisible">
+    <div class="products-section">
+        <div class="container-fluid main-pad">
+            <div class="about-sections">
+                <div class="about-section-2">
+                    <div class="row w-100 m-0">
+                        <div class="col-sm-3 ">
+                            <div class="img-ab-div">
+                                <img src="../../assets/imgs/image90.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="p-36-6 mb-1">About Us</p>
+                            <p class="p-24-5 mb-1">Heading</p>
+                            <p class="p-16">asellus vestibulum lorem sed risus ultricies tristique. Lacus vel facilisis
+                                volutpat </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-section-3">
+                    <div class="row w-100 m-0">
+                        <div class="col-sm-3 p-0">
+                            <img src="../../assets/imgs/image90.png" alt="">
+                        </div>
+                        <div class="col-sm-9 p-4">
+                            <p class="p-36-6 mb-1">Quality Matters</p>
+                            <p class="p-16">asellus vestibulum lorem sed risus ultricies tristique. Lacus vel facilisis
+                                volutpatLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Lorem ipsum dt.adipiscing elit, incididunt
+                                ut dipiscing elit. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contents">
+                <div class="heading mb-5">
+                    <span>CONTENTS</span>
+                    <p class="b-28-5 mb-0">TABLE OF CONTENTS</p>
+                </div>
+                <div class="contentsPart mb-5">
+                    <p class="p-24 mb-3">LED BULBS</p>
+                    <table class="table">
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="contentsPart mb-5">
+                    <p class="p-24 mb-3">LED BULBS</p>
+                    <table class="table">
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                        <tr>
+                            <td>Bulbs</td>
+                            <td>04</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section-1 mb-3">
+                <p class="p-24 mb-5">LED BULBS</p>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="{{apiUrl + bannerData.image}}" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="../../assets/imgs/image 94.png" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="../../assets/imgs/image 94.png" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="../../assets/imgs/image 94.png" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="../../assets/imgs/image 94.png" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="../../assets/imgs/image 94.png" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <div class="section-2 mb-3">
+                <p class="p-24 mb-5">CLOSET LIGHTS</p>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <img src="../../assets/imgs/image 96.png" alt="" class="prod-img">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="p-20-b">A19 14WD</p>
+                        <p class="p-16">14W 1600 lmn dimmable LED Bulb available in warm and cool white</p>
+                        <p class="p-16-b mb-1">Description:</p>
+                        <p class="p-16">*Certified for fully enclosed fixture*</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="p-16-b mb-1">Color:</p>
+                        <div class="d-flex">
+                            <div class="square-div mb-3 me-3" style="background-color: #000;"></div>
+                            <div class="square-div mb-3 me-3" style="background-color: #9c9c9c;"></div>
+                        </div>
+                        <p class="p-16-b mb-1">Specification:</p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Wattage: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Life Time: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Color Tamp: <span style="color: #1881B0;">14v</span> </p>
+                        <p class="p-16">Voltage: <span style="color: #1881B0;">14v</span> </p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <div class="section-3 mb-3">
+                <p class="p-24 mb-5">NOTES</p>
+                <div class="notes"></div>
+                <div class="notes"></div>
+                <div class="notes"></div>
+                <div class="notes"></div>
+                <div class="notes"></div>
+                <div class="notes"></div>
+                <div class="notes"></div>
+            </div>
+            <div class="section-4 text-center">
+                <p class="p-36-7">INSTANT LIGHT</p>
+                <img src="../../assets/imgs/Group 1000006029.png" alt="" class="footer-img mb-3">
+                <p class="p-18-b">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Commodo sed egestas egestas fringilla. Et egestas quis ipsum suspendisse
+                    ultrices gravida dictum fusce. Habitant morbi tristique senectus et netus et malesuada fames. Diam
+                    phasellus vestibulum lorem sed risus ultricies tristique. Lacus vel facilisis volutpat est velit
+                    egestas dui id ornare. Nec feugiat in fermentum posuere urna nec. Massa tincidunt nunc pulvinar
+                    sapien. Ultricies lacus sed turpis tincidunt id aliquet risus. Elit at imperdiet dui accumsan. Amet
+                    consectetur adipiscing elit duis tristique sollicitudin nibh sit. Id volutpat lacus laoreet non
+                    curabitur gravida arcu ac. Euismod quis viverra nibh cras pulvina
+                </p>
+                <pre class="b-24-6">www.instantlight.com   |   81901-3718191</pre>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="skeleton" *ngIf="loading">
+    <ngx-skeleton-loader count="1" [theme]="{
+        'height.px': 550,
+        'width.%':100,
+        'background-color': '#F9F7F6' ,
+        'display':'block',
+        'margin-bottom':'5rem'}">
+    </ngx-skeleton-loader>
+    <div class="main-pad container-fluid">
+        <div class="row">
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 40,
+                'width.%':7,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'1rem',
+                'margin-top':'2rem'}">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" [theme]="{
+                'height.px': 50,
+                'width.%':40,
+                'background-color': '#F9F7F6' ,
+                'display':'block',
+                'margin-bottom':'35px',}">
+            </ngx-skeleton-loader>
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 410,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'border-radius':'7px',
+                    'margin-bottom':'5rem'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 410,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'border-radius':'7px',
+                    'margin-bottom':'5rem'}">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="col-sm-6">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 410,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'border-radius':'7px',
+                    'margin-bottom':'5rem'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

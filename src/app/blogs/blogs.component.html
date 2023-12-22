@@ -1,0 +1,326 @@
+<div *ngIf="!loading">
+    <div class="about-section-1"
+        [style.background]="'linear-gradient(#1881b091, #1881b0c4), url(' + (apiUrl + bannerData.image) + ')'"
+        *ngIf="bannerData">
+        <div class="main-pad">
+            <p class="p-56">{{bannerData.title}}</p>
+            <p class="p-24">{{bannerData.description}}</p>
+            <p class="p-18-6">Scroll Down</p>
+            <button class="scroll-down" (click)="triggerScrollTo()">
+                <img src="../../assets/imgs/Group 8.svg" alt="">
+            </button>
+        </div>
+    </div>
+
+    <div class="blogs" id="destination">
+        <div class="main-pad container-fluid">
+            <p class="b-20-5 mb-0">Blogs</p>
+            <p class="p-36-6 mb-4 mb-sm-5">Watch Our Latest Updates</p>
+            <div class="row ro-rev mb-3">
+                <div class="col-sm-8">
+                    <div class="row w-100 m-0 ro-overflow">
+                        <div class="col-sm-6" *ngFor="let blog of filteredBlogs">
+                            <div class="blog-card" [routerLink]="['/blog-details', blog.slug]">
+                                <img src="{{apiUrl + blog.blog_image[0].image}}" alt="">
+                                <div class="content-part">
+                                    <p class="b-18-5 text-center">{{blog.sub_title}}</p>
+                                    <p class="p-26-7">{{ blog.title }}</p>
+                                    <p class="p-16" [innerHTML]="blog.description"></p>
+                                    <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg"
+                                            width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="blog-right-part">
+                        <!-- <form (ngSubmit)="searchBlogs()">
+                            <div class="d-flex">
+                                <input type="text" placeholder="search" [(ngModel)]="searchQuery" name="search">
+                                <button type="submit" class="fa fa-search" aria-hidden="true"></button>
+                            </div>
+                        </form>
+
+                        <div class="search_results" *ngIf="searchResults.length > 0">
+                            <p class="p-16-5">Search Results</p>
+                            <div class="posts-div mb-3" *ngFor="let post of searchResults"
+                                [routerLink]="['/blog-details', post.slug]">
+                                <img [src]="apiUrl + post.blog_image[0].image" alt="">
+                                <div>
+                                    <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                    <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                    <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg"
+                                            width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_results" *ngIf="searchResults.length === 0 && searchQuery.length >=1">
+                            <p class="p-16-5">Search Results</p>
+                            <p class="p-14">No results found</p>
+                        </div> -->
+
+                        <form (ngSubmit)="searchBlogs()">
+                            <div class="d-flex">
+                                <input type="text" placeholder="search" [(ngModel)]="searchQuery" name="search"
+                                    (input)="onSearchInputChange()">
+                                <button type="submit" class="fa fa-search" aria-hidden="true"></button>
+                            </div>
+                        </form>
+
+                        <div class="search_results" *ngIf="searchResultsVisible && searchResults.length > 0 && searchQuery.length >= 1">
+                            <div class="posts-div mb-3" *ngFor="let post of searchResults"
+                                [routerLink]="['/blog-details', post.slug]">
+                                <img [src]="apiUrl + post.blog_image[0].image" alt="">
+                                <div>
+                                    <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                    <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                    <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg"
+                                            width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_results h-auto"
+                            *ngIf="searchResultsVisible && searchResults.length === 0 && searchQuery.length >= 1">
+                            <p class="p-16-5 mb-0">Search Results</p>
+                            <div class="lottie-svg">
+                                <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+                            </div>
+                            <p class="p-14 text-center">No results found</p>
+                        </div>
+
+
+                        <div class="tags-posts">
+                            <p class="p-20-5">Tags</p>
+                            <!-- <div class="tags-div">
+                            <p class="b-18-5" *ngFor="let tags of blogtags">{{tags.title}}</p>
+                        </div> -->
+                            <div class="tags-div">
+                                <p class="b-18-5" (click)="filterBlogsByTag(null)">All</p>
+                                <p class="b-18-5" *ngFor="let tag of blogtags" (click)="filterBlogsByTag(tag.title)">
+                                    {{tag.title}}</p>
+                            </div>
+                            <div class="hidden-div">
+                                <p class="p-20-5">Popular Posts</p>
+                                <div class="mb-5">
+                                    <div class="posts-div mb-3" *ngFor="let post of popularPosts"
+                                        [routerLink]="['/blog-details', post.slug]">
+                                        <img src="{{apiUrl + post.blog_image[0].image}}" alt="">
+                                        <div>
+                                            <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                            <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                            <button class="readMore-btn">Read more <svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="p-20-5">Trending Posts</p>
+                                <div class="mb-0">
+                                    <div class="posts-div mb-3" *ngFor="let post of trendingPosts"
+                                        [routerLink]="['/blog-details', post.slug]">
+                                        <img src="{{apiUrl + post.blog_image[0].image}}" alt="">
+                                        <div>
+                                            <p class="p-16-5 mb-0">{{ post.title }}</p>
+                                            <p class="p-14 mb-0" [innerHTML]="post.description"></p>
+                                            <button class="readMore-btn">Read more <svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mob-div">
+                <p class="p-20-5">Popular Posts</p>
+                <div class="mb-5">
+                    <div class="posts-div mb-3">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                        <div>
+                            <p class="p-16-5 mb-0">DRYER BOOSTER FANS</p>
+                            <p class="p-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscin</p>
+                            <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="posts-div mb-3">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                        <div>
+                            <p class="p-16-5 mb-0">DRYER BOOSTER FANS</p>
+                            <p class="p-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscin</p>
+                            <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="posts-div mb-3">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                        <div>
+                            <p class="p-16-5 mb-0">DRYER BOOSTER FANS</p>
+                            <p class="p-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscin</p>
+                            <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <p class="p-20-5">Trending Posts</p>
+                <div class="mb-0">
+                    <div class="posts-div mb-3">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                        <div>
+                            <p class="p-16-5 mb-0">DRYER BOOSTER FANS</p>
+                            <p class="p-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscin</p>
+                            <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="posts-div mb-3">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                        <div>
+                            <p class="p-16-5 mb-0">DRYER BOOSTER FANS</p>
+                            <p class="p-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscin</p>
+                            <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="posts-div mb-3">
+                        <img src="../../assets/imgs/1681461848bulbs.jpg" alt="">
+                        <div>
+                            <p class="p-16-5 mb-0">DRYER BOOSTER FANS</p>
+                            <p class="p-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscin</p>
+                            <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="skeleton mb-5" *ngIf="loading">
+    <ngx-skeleton-loader count="1" [theme]="{
+        'height.px': 550,
+        'width.%':100,
+        'background-color': '#F9F7F6' ,
+        'display':'block',
+        'margin-bottom':'5rem'}">
+    </ngx-skeleton-loader>
+    <div class="main-pad container-fluid">
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 30,
+            'width.%':30,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'1rem',
+            'margin-top':'2rem'}">
+        </ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 55,
+            'width.%':80,
+            'background-color': '#F9F7F6' ,
+            'display':'block',
+            'margin-bottom':'15px',}">
+        </ngx-skeleton-loader>
+        <div class="row m-0 w-100">
+            <div class="col-sm-8">
+                <div class="row w-100 m-0">
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 550,
+                        'width.%':100,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-bottom':'1rem'}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 550,
+                        'width.%':100,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-bottom':'1rem'}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 550,
+                        'width.%':100,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-bottom':'1rem'}">
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="col-sm-6">
+                        <ngx-skeleton-loader count="1" [theme]="{
+                        'height.px': 550,
+                        'width.%':100,
+                        'background-color': '#F9F7F6' ,
+                        'display':'block',
+                        'margin-bottom':'1rem'}">
+                        </ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 600,
+                    'width.%':100,
+                    'background-color': '#F9F7F6' ,
+                    'display':'block',
+                    'margin-bottom':'1rem'}">
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

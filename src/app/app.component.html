@@ -1,0 +1,5 @@
+<app-header *ngIf="!_router.url.includes('search')"></app-header>
+<div class="sections" >
+    <router-outlet></router-outlet>
+</div>
+<app-footer *ngIf="!_router.url.includes('search')"></app-footer>

@@ -1,0 +1,269 @@
+.breadcrumbs {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.breadcrumb-item {
+    padding: 0;
+}
+
+.breadcrumb-item.active {
+    color: #1881b0;
+    font-weight: 500;
+    border-bottom: 2px solid #1881b0;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: none;
+}
+
+.subcat-btn {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: #eee;
+    color: #000;
+}
+
+.subcat-btn.active {
+    background-color: #EEF9FF;
+    color: #1881b0;
+}
+
+.products-page {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.left-part {
+    background-color: #fff;
+    border: none;
+}
+
+.accordion-item {
+    border: none;
+}
+
+.accordion-body {
+    padding: 0;
+}
+
+.subcat-btn svg {
+    margin-right: 20px;
+}
+
+/* .accordion-button:focus {
+    background-color: #1881b0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: none;
+    border: none;
+} */
+
+.accordion-button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #eee;
+}
+
+.accordion-button.active-btn {
+    color: #1881b0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.lottie-svg{
+    height: 300px;
+}
+
+/* .accordion-button:hover {
+    background-color: #1881b0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+} */
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url(../../assets/imgs/DropDownb.svg);
+    transform: var(--bs-accordion-btn-icon-transform);
+}
+
+.accordion-button::after{
+    background-image: url(../../assets/imgs/DropDown.svg);
+}
+
+.prod-card {
+    background-color: #EEF9FF;
+    border-radius: 16px;
+    text-align: -webkit-center;
+    padding: 20px;
+    width: 90%;
+    margin-bottom: 30px;
+}
+
+.prod-card img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 30px;
+}
+
+.right-part {
+    background-color: #fff;
+    padding: 25px;
+}
+
+.sub-prod-card {
+    border-radius: 38px;
+    background-color: #EEF9FF;
+    padding: 20px;
+    text-align: -webkit-center;
+    margin-bottom: 30px;
+    width: 90%;
+    cursor: pointer;
+}
+
+.sub-prod-card img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 30px;
+}
+
+.subcat-btn:hover {
+    background-color: #EEF9FF;
+    color: #1881b0;
+    transition: .3s;
+}
+
+.sub-prod-card:hover .readMore-btn {
+    font-weight: 600;
+    transition: .3s;
+}
+
+.pc{
+    padding: 13px 20px;
+    font-size: 20px;
+    background: #1881B0;
+    color: #fff;
+    font-weight: 500;
+}
+
+@media (max-width:1024px) {
+
+    .breadcrumbs {
+        padding: 0 20px;
+    }
+
+    .prod-card {
+        width: 100%;
+    }
+
+    .view-coll-btn {
+        width: 100%;
+    }
+
+    .accordion-button.active-btn {
+        font-size: 16px;
+    }
+
+    .b-20-5 {
+        font-size: 15px;
+    }
+
+    .sub-prod-card {
+        width: 100%;
+    }
+
+}
+
+@media (max-width:992px) {
+    .prod-card {
+        padding: 10px;
+    }
+
+    .prod-card img {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .view-coll-btn {
+        font-size: 12px;
+        height: 48px;
+    }
+
+    .accordion-button.active-btn{
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .b-20-5{
+        font-size: 14px;
+    }
+
+    .right-part{
+        padding: 25px 10px;
+    }
+
+    .accordion-button{
+        padding: 10px;
+    }
+
+    .sub-prod-card img{
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+        object-fit: contain;
+    }
+
+    .prod-card img{
+        object-fit: contain;
+    }
+}
+
+@media (max-width:765px) {
+    .breadcrumbs {
+        padding: 0 15px;
+    }
+
+    .view-coll-btn{
+        font-size: 14px;
+        width: 215px;
+        height: 38px;
+    }
+
+    .prod-card{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .prod-card img{
+        width: 150px;
+        object-fit: contain;
+        margin-bottom: 30px;
+    }
+
+    .right-part{
+        margin-top: 30px;
+    }
+
+    .accordion-button.active-btn{
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .b-20-5{
+        font-size: 18px;
+    }
+
+    .accordion-button{
+        padding: 20px;
+    }
+
+}

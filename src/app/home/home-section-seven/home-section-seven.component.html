@@ -1,0 +1,92 @@
+<!-- <div class="home-section-7">
+  <div class="container-fluid">
+    <p class="b-20-5 mb-0 text-center">Testimonials</p>
+    <p class="p-36-6 mb-4 text-center">What Our Clients Say About Us</p>
+
+    <owl-carousel-o [options]="customOptions">
+      <ng-container>
+        <ng-template carouselSlide>
+          <div class="slide slide-1">
+            <img src="../../../assets/imgs/Image.svg" alt="" class="circle-img">
+            <p class="p-24-7 mb-0">Hannah Schmitt</p>
+            <p class="p-18 mb-1">Customer</p>
+            <img src="../../../assets/imgs/clarity_block-quote-line.svg" alt="" class="quote-img">
+            <p class="p-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nibh mauris, nec turpis orci
+              lectus maecenas. Suspendisse sed magna eget nibh in turpis. Consequat duis diam lacus arcu. Faucibus
+              venenatis felis id augue sit cursus pellentesque enim
+            </p>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="slide slide-1">
+            <img src="../../../assets/imgs/Image.svg" alt="" class="circle-img">
+            <p class="p-24-7 mb-0">Hannah Schmitt1</p>
+            <p class="p-18 mb-1">Customer</p>
+            <img src="../../../assets/imgs/clarity_block-quote-line.svg" alt="" class="quote-img">
+            <p class="p-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nibh mauris, nec turpis orci
+              lectus maecenas. Suspendisse sed magna eget nibh in turpis. Consequat duis diam lacus arcu. Faucibus
+              venenatis felis id augue sit cursus pellentesque enim 
+            </p>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="slide slide-1">
+            <img src="../../../assets/imgs/Image.svg" alt="" class="circle-img">
+            <p class="p-24-7 mb-0">Hannah Schmitt2</p>
+            <p class="p-18 mb-1">Customer</p>
+            <img src="../../../assets/imgs/clarity_block-quote-line.svg" alt="" class="quote-img">
+            <p class="p-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nibh mauris, nec turpis orci
+              lectus maecenas. Suspendisse sed magna eget nibh in turpis. Consequat duis diam lacus arcu. Faucibus
+              venenatis felis id augue sit cursus pellentesque enim 
+            </p>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="slide slide-1">
+            <img src="../../../assets/imgs/Image.svg" alt="" class="circle-img">
+            <p class="p-24-7 mb-0">Hannah Schmitt3</p>
+            <p class="p-18 mb-1">Customer</p>
+            <img src="../../../assets/imgs/clarity_block-quote-line.svg" alt="" class="quote-img">
+            <p class="p-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nibh mauris, nec turpis orci
+              lectus maecenas. Suspendisse sed magna eget nibh in turpis. Consequat duis diam lacus arcu. Faucibus
+              venenatis felis id augue sit cursus pellentesque enim 
+            </p>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="slide slide-1">
+            <img src="../../../assets/imgs/Image.svg" alt="" class="circle-img">
+            <p class="p-24-7 mb-0">Hannah Schmitt4</p>
+            <p class="p-18 mb-1">Customer</p>
+            <img src="../../../assets/imgs/clarity_block-quote-line.svg" alt="" class="quote-img">
+            <p class="p-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus nibh mauris, nec turpis orci
+              lectus maecenas. Suspendisse sed magna eget nibh in turpis. Consequat duis diam lacus arcu. Faucibus
+              venenatis felis id augue sit cursus pellentesque enim 
+            </p>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</div> -->
+
+<div class="home-section-7">
+  <div class="container-fluid">
+    <p class="b-20-5 mb-0 text-center">Testimonials</p>
+    <p class="p-36-6 mb-4 text-center">What Our Clients Say About Us</p>
+
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let testimonial of testimonialsData">
+        <ng-template carouselSlide>
+          <div class="slide slide-1">
+            <img [src]="apiUrl + testimonial.image" alt="" class="circle-img">
+            <p class="p-24-7 mb-0">{{ testimonial.name }}</p>
+            <p class="p-18 mb-1">{{ testimonial.designation }}</p>
+            <img src="../../../assets/imgs/clarity_block-quote-line.svg" alt="" class="quote-img">
+            <p class="p-16">{{ testimonial.description }}</p>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</div>

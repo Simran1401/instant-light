@@ -1,0 +1,59 @@
+<div class="home-section-2">
+    <!-- <div class="left-part-1">
+        <p class="b-20-5 mb-0">Shop By Category</p>
+        <p class="p-36-6">The products you need for the look you want</p>
+        <p class="p-16">
+            The bathroom becomes an oasis of luxury with our collections crafted from around the world. Fireclay sinks
+            add timeless style, bathtubs of understated beauty become centerpieces.
+        </p>
+        <button class="mob-view-btn">View all <i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+    </div> -->
+
+    <div class="left-part-1" *ngIf="shopByCategoryData?.title||shopByCategoryData?.description">
+        <p class="b-20-5 mb-0">Shop By Category</p>
+        <p class="p-36-6">{{ shopByCategoryData.title }}</p>
+        <p class="p-16">{{ shopByCategoryData.description }} </p>
+        <!-- <button class="mob-view-btn">View all <i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
+    </div>
+
+    <div class="right-part-1">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let products of productCategory">
+                <div class="slide-section">
+                    <div class="slide-1">
+                        <img src="{{apiUrl + products.image}}" alt="">
+                        <div class="overlay">
+                            <p class="p-26-6 mb-1 text-center" style="text-transform: capitalize;">{{products.title}}
+                            </p>
+                            <a style="border: none;background-color: transparent;color: #fff; text-decoration: none;" class="p-18 mb-0"
+                                href="/category/{{ products.id }}">Shop Now <i class="fa fa-long-arrow-right"
+                                    aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- <ng-template carouselSlide>
+                <div class="slide-section">
+                    <div class="slide-1">
+                        <img src="../../../assets/imgs/Group 329.png" alt="">
+                        <div class="overlay">
+                            <p class="p-26-6 mb-1 text-center">ELECTRICAL SUPPLIES</p>
+                            <p class="p-18 mb-0">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="slide-section">
+                    <div class="slide-1">
+                        <img src="../../../assets/imgs/HVAC-DISPLAY.jpg" alt="">
+                        <div class="overlay">
+                            <p class="p-26-6 mb-1 text-center">HVAC</p>
+                            <p class="p-18 mb-0">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template> -->
+        </owl-carousel-o>
+    </div>
+</div>

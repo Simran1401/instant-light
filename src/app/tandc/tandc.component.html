@@ -1,0 +1,28 @@
+<div class="tc-sections">
+    <div class="container-fluid main-pad">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-part">
+                    <ol style="list-style: none; padding-left: 0;">
+                        <li *ngFor="let section of section; index as i">
+                            <button class="scroll-down" (click)="triggerScrollTo(section.id)">
+                                {{ section.title }}
+                            </button>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="section-part">
+                    <p class="p-36-6 mb-sm-3 mb-3">Terms & Conditions</p>
+                    <div class="right-part">
+                        <div *ngFor="let section of section" [id]="section.slug">
+                            <p class="b-18-5">{{ section.title }}</p>
+                            <div class="p-16" [innerHtml]="section.description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

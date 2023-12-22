@@ -1,0 +1,53 @@
+<div class="search-section">
+    <div class="container-fluid p-0">
+        <div class="d-flex align-items-center justify-content-between bg-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="cursor: pointer;" fill="currentColor"
+                class="bi bi-chevron-left" viewBox="0 0 16 16" (click)="backLocation()">
+                <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+            </svg>
+            <form class="search-form mob-search">
+                <div class="d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                    <input type="search" placeholder="search" [(ngModel)]="searchQuery" name="search"
+                        (input)="onSearchInputChange()">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-x-circle" viewBox="0 0 16 16" (click)="clearSearch()">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg> -->
+                </div>
+            </form>
+        </div>
+        <div class="search_results" *ngIf="searchResultsVisible && searchResults.length > 0 && searchQuery.length >= 3">
+            <p class="p-16-5">Search Results</p>
+            <a href="/product-details-page/{{ product.id }}" class="posts-div mb-3"
+                *ngFor="let product of searchResults" style="color: #000;text-decoration: none;">
+                <img [src]="apiUrl + product.image" alt="">
+
+                <div>
+                    <p class="p-16-5 mb-0" style="text-transform: capitalize;">{{ product.name }}</p>
+                    <p class="p-14 mb-0" [innerHTML]="product.description"></p>
+                    <button class="readMore-btn">Read more <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                </div>
+            </a>
+        </div>
+        <div class="search_results h-auto" *ngIf="searchResultsVisible && searchResults.length === 0">
+            <p class="p-16-5 mb-0">Search Results</p>
+            <div class="lottie-svg">
+                <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+            </div>
+            <p class="p-14 text-center">No results found</p>
+        </div>
+    </div>
+</div>
